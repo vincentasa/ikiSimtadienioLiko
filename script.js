@@ -7,7 +7,7 @@ function updateCountdown() {
 
   //jei laikas baigesi
   if (distance <= 0) {
-    countdownEl.innerHTML = "🎉 Egzaminai prasidėjo! Sėkmės! 🎉";
+    countdownEl.innerHTML = "🎉 Gero šimtadienio! 🎉";
     countdownEl.classList.add('pulse');
     clearInterval(interval);
     return;
