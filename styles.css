@@ -1,19 +1,20 @@
 :root {
-  --bg: #000000;
-  --muted: #9ca3af;
-  --accent: #ffffff;
-  --card: rgba(255,255,255,0.03);
+  --bg-deep: #041d2b; /* deep ocean */
+  --bg-mid: #063a52; /* mid-teal */
+  --bg-surface: #0b5b73; /* surface turquoise */
+  --muted: #9fc0c9; /* soft seafoam */
+  --accent: #e6fbff; /* pale aqua */
+  --card: rgba(6,58,82,0.24);
+  --glass: rgba(255,255,255,0.03);
   --page-padding: clamp(12px, 3vw, 24px);
   --gap: clamp(0.25rem, 1.2vh, 0.75rem);
-  --max-image-width: min(100vh, 400px);
+  --max-image-width: min(100vh, 420px);
+  --radius: clamp(8px, 1.6vw, 12px);
 }
 
-/* created: 30metistevas, Vincentas Šerėnas*/
+/* Atlantic theme by 30metistevas — oceanic blues and seafoam */
 
-
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body {
   margin: 0;
@@ -26,11 +27,13 @@ body {
   padding: var(--page-padding);
   box-sizing: border-box;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: var(--bg);
   color: var(--accent);
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:
+    radial-gradient(800px 250px at 15% 10%, rgba(255,255,255,0.02), transparent 8%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-surface) 100%);
 }
 
 h1,h2,p {
@@ -40,19 +43,22 @@ h1,h2,p {
   color: var(--muted);
 }
 
-
 #countdown {
   font-family: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
-  font-weight: 400;
+  font-weight: 600;
   font-size: clamp(1.8rem, 9vw, 3.5rem);
   color: var(--accent);
-  letter-spacing: 0.04em;
-  padding: clamp(0.35rem, 1.2vw, 0.5rem) clamp(0.8rem, 2.5vw, 1rem);
-  border-radius: clamp(8px, 1.6vw, 10px);
+  letter-spacing: 0.02em;
+  padding: clamp(0.5rem, 1.4vw, 0.85rem) clamp(0.9rem, 2.8vw, 1.2rem);
+  border-radius: var(--radius);
   line-height: 1;
-  background: var(--card);
-  box-shadow: 0 10px 30px rgba(255,255,255,0.03);
-  transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 260ms ease, color 160ms ease;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  backdrop-filter: blur(6px) saturate(120%);
+  box-shadow: 0 18px 40px rgba(3,23,30,0.55), inset 0 1px 0 rgba(255,255,255,0.02);
+  transition: transform 300ms cubic-bezier(.2,.9,.3,1), box-shadow 260ms ease, color 160ms ease;
+  border: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  z-index: 2;
 }
 
 /* smaller on narrow screens */
@@ -61,24 +67,55 @@ h1,h2,p {
   #countdown { font-size: clamp(1.4rem, 8vw, 2.2rem); }
 }
 
-/* subtle page depth */
+/* subtle ocean surface overlay */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(1200px 400px at 10% 10%, rgba(255,255,255,0.02), transparent 10%), radial-gradient(800px 300px at 90% 90%, rgba(255,255,255,0.01), transparent 10%);
+  background-image: radial-gradient(1200px 400px at 10% 10%, rgba(255,255,255,0.015), transparent 8%),
+                    linear-gradient(180deg, rgba(255,255,255,0.01), transparent 40%);
   pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: -2;
 }
 
-/* pulse animation used when countdown updates */
+/* decorative animated wave at the bottom */
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 36vh;
+  background-image: url("img/wave.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: 140% auto;
+  opacity: 0.36;
+  pointer-events: none;
+  z-index: -1;
+  will-change: background-position;
+  filter: contrast(1.05) saturate(1.05) drop-shadow(0 -6px 18px rgba(3,23,30,0.18));
+  animation: waveMove 14s cubic-bezier(.2,.6,.35,.95) infinite;
+}
+
+@keyframes waveMove {
+  0% { background-position: 50% 100%; }
+  25% { background-position: 46% 98%; }
+  50% { background-position: 52% 96%; }
+  75% { background-position: 48% 98%; }
+  100% { background-position: 50% 100%; }
+}
+
+/* gentle pulse / swell animation used when countdown updates */
 .pulse {
-  animation: pulseScale 360ms cubic-bezier(.2,.9,.3,1);
+  animation: swell 420ms cubic-bezier(.2,.9,.3,1);
 }
 
-@keyframes pulseScale {
-  0% { transform: scale(1); box-shadow: 0 10px 30px rgba(255,255,255,0.03); }
-  30% { transform: scale(1.04); box-shadow: 0 18px 44px rgba(255,255,255,0.06); }
-  100% { transform: scale(1); box-shadow: 0 10px 30px rgba(255,255,255,0.03); }
+@keyframes swell {
+  0% { transform: translateY(0) scale(1); box-shadow: 0 12px 34px rgba(3,23,30,0.45); }
+  45% { transform: translateY(-3px) scale(1.03); box-shadow: 0 26px 60px rgba(3,23,30,0.55); }
+  100% { transform: translateY(0) scale(1); box-shadow: 0 12px 34px rgba(3,23,30,0.45); }
 }
 
 /* respect user preference for reduced motion */
@@ -86,7 +123,7 @@ body::before {
   #countdown, .pulse { transition: none; animation: none; }
 }
 
-/* make images smaller and responsive */
+/* images */
 img {
   max-width: var(--max-image-width);
   width: 100%;
@@ -94,11 +131,11 @@ img {
   display: block;
   margin: clamp(0.5rem, 2.5vh, 1.25rem) auto 0;
   border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(3,23,30,0.45);
 }
 
-/* indicate the image is interactive */
 #surprise-img { cursor: pointer; }
-#surprise-img:focus { outline: 2px solid rgba(255,255,255,0.08); outline-offset: 4px; }
+#surprise-img:focus { outline: 2px solid rgba(159,192,201,0.12); outline-offset: 4px; }
 
 /* footer */
 .site-footer {
@@ -108,9 +145,11 @@ img {
   bottom: clamp(8px, 2vh, 12px);
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255,255,255,0.02);
-  padding: clamp(4px, 1vh, 8px) clamp(8px, 2vw, 12px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding: clamp(6px, 1vh, 10px) clamp(10px, 2vw, 14px);
   border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.03);
+  z-index: 3;
 }
 
 .site-footer a { color: var(--muted); text-decoration: none; display: inline-block; }

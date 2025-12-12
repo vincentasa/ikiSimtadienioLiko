@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#dffcff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#9fc0c9" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0b7b93" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#074c60" stop-opacity="0.10"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <path fill="url(#g1)" opacity="0.92" d="M0,192L48,186.7C96,181,192,171,288,149.3C384,128,480,96,576,90.7C672,85,768,107,864,112C960,117,1056,107,1152,106.7C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+    <path fill="url(#g2)" opacity="0.78" d="M0,224L48,218.7C96,213,192,203,288,197.3C384,192,480,192,576,176C672,160,768,128,864,138.7C960,149,1056,203,1152,213.3C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+  </g>
+</svg>
